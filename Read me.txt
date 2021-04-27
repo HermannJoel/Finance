@@ -1,0 +1,5 @@
+1.Machine Learning Projects
+2.KNN
+3.Kmeans
+4.PCA
+5.Churn

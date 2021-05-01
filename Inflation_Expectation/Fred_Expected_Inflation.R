@@ -1,25 +1,29 @@
 #----------------------------------DECOMPOSING EXPECTED INFLATION PREDICTION
+library(dplyr)
+library(mice)
 #1.EDA
+#Import the imput
 inputs.fred <- read.csv(file.choose())
-target <- read.csv(file.choose())
-summary(inputs.fred)
 str(inputs.fred)
+summary(inputs.fred)
+#import the target
+target <- read.csv(file.choose())
 summary(target)
+head(target)
 str(target)
 target %>% 
   rename(
-    Target = Inflation
+    Target = Target
   )
 
 dim(inputs.fred)
 dim(target)
 anyNA(inputs.fred)
-anyNA(inflation)
 
 #Make a copy of the original data frame
 inputs.fred.prep <- inputs.fred
 
-inputs.fred.prep$Target <- target
+inputs.fred.prep$Target <- Target
 dim(inputs.fred.prep)
 colnames(inputs.fred.prep)
 str(inputs.fred.prep)
@@ -47,26 +51,13 @@ model.names
 #Turning parameters
 modelLookup('ridge')
 #2.-----------------------------MODELLING
-#Principal Components
-pca.model <- preProcess(train[, !names(train) %in% "Target"], method='pca')  
-#Predict
-train.pca <- predict(pca.model, newdata = train[, !names(train) %in% "Target"])
-test.pca <- predict(pca.model, newdata = test[, !names(test) %in% "Target"])
-str(train)
-#
-str(target)
 #
 train$Target <- unlist(train$Target)
 test$Target <- unlist(test$Target)
-
 str(train$Target)
-#Build regression model
-formula <- formula(Target~., data=train)#we choose a subset of 6 predictors
-linear.model<- lm(formula, data = train)
-summary(linear.model)
 #3.------------------------------------FEATURES SELECTION
 base.model <- lm(Target~1, data=train)#only intercept model
-all.model <- lm(Target~., data=train)
+all.model <- lm(Target~., data=train)#all features model
 summary(base.model)
 summary(all.model)
 #1.Forward Stepmwise selection
@@ -137,7 +128,7 @@ plot(outpout)
 dtTrain <- data.table(train)
 head(dtTrain)
 str(dtTrain)
-#-------------------SELECT ONLY SIG VARIABLES
+#-------------------SELECT ONLY SIGNIFICANT VARIABLES
 testSig <- test[, (names(test) %in% c("FinanceMuchWorseOff","FinanceSomewhatWorseOff","FinanceAboutTheSame","FinanceSomewhatBetterOff", 
                              "FinanceMuchBetterOff","FinProspMuchWorseOff","FinProspSomewhatWorseOff","FinProspAboutTheSame",
                              "FinProspSomewhatBetterOff","FinProspMuchBetterOff","UnemRate:<20","UnemRate:20-40","UnemRate:40-60", 

@@ -19,22 +19,30 @@ target %>%
 dim(inputs.fred)
 dim(target)
 anyNA(inputs.fred)
+str(target)
+str(inputs.fred)
 
 #Make a copy of the original data frame
 inputs.fred.prep <- inputs.fred
-
-inputs.fred.prep$Target <- Target
+#Insert `Target` back to original data frame
+inputs.fred.prep$Target <- target$Target
 dim(inputs.fred.prep)
 colnames(inputs.fred.prep)
 str(inputs.fred.prep)
 #Exclude the target
-varToExc <- names(inputs.fred.prep) %in% c("Target")
+#varToExc <- names(inputs.fred.prep) %in% c("Target")
 #
-x <- inputs.fred.prep[!varToExc]
-dim(x)
-y <- inputs.fred.prep$Target
-dim(x)
+#x <- inputs.fred.prep[!varToExc]
+#dim(x)
+#y <- inputs.fred.prep$Target
+#dim(x)
 #Split the data train and test sets
+library(rsample)
+library(partykit)
+library(caretEnsemble)
+library(caret)
+library(mice)
+
 set.seed(88)
 data_split <- initial_split(inputs.fred.prep, prop = .80)
 train <- training(data_split)
@@ -45,16 +53,16 @@ head(test)
 #Box plot: target
 boxplot(test$Target)
 boxplot.stats(test$Target)$out
-
+#To call all models names
 model.names <- paste(names(getModelInfo()), collapse =', ')
 model.names
 #Turning parameters
 modelLookup('ridge')
 #2.-----------------------------MODELLING
 #
-train$Target <- unlist(train$Target)
-test$Target <- unlist(test$Target)
-str(train$Target)
+#train$Target <- unlist(train$Target)
+#test$Target <- unlist(test$Target)
+#str(train$Target)
 #3.------------------------------------FEATURES SELECTION
 base.model <- lm(Target~1, data=train)#only intercept model
 all.model <- lm(Target~., data=train)#all features model
@@ -129,6 +137,24 @@ dtTrain <- data.table(train)
 head(dtTrain)
 str(dtTrain)
 #-------------------SELECT ONLY SIGNIFICANT VARIABLES
+trainSig <- train[, (names(train) %in% c("FinanceMuchWorseOff","FinanceSomewhatWorseOff","FinanceAboutTheSame","FinanceSomewhatBetterOff", 
+                             "FinanceMuchBetterOff","FinProspMuchWorseOff","FinProspSomewhatWorseOff","FinProspAboutTheSame",
+                             "FinProspSomewhatBetterOff","FinProspMuchBetterOff","UnemRate:<20","UnemRate:20-40","UnemRate:40-60", 
+                             "UnemRate:60-80","UnemRate:>80","IntRate:<20","IntRate:20-40","IntRate:40-60","IntRate:60-80","IntRate:>80", 
+                             "StockPrice:<20","StockPrice:20-40','StockPrice:40-60','StockPrice:60-80','StockPrice:>80','Inflation", 
+                             "Deflation","Inflation_2y","Deflation_2y","FullTime","PartTime","NotWorking","LaidOff","SickOrLeave",
+                             "UnableToWork","Retiree","Student","Homemaker","Other","Taxe:Increase","Taxe:Decrease","Loan:MuchHarder",
+                             "Loan:SomewhatHarder","Loan:EquallyEasy/Hard","Loan:SomewhatEasier","Loan:MuchEasier","Loan12m:MuchHarder", 
+                             "Loan12m:SomewhatHarder","Loan12m:EquallyEasy/Hard","Loan12m:SomewhatEasier","Loan12m:MuchEasier","HomePrice2y:Increase",
+                             "HomePrice2y:Decrease","HomePrice2y:Missing","Female","Male","Hispanic","NonHispanic","White","BlackOrAfrican",
+                             "AmericanIndianOrAlaskaNative","Asian","NativeHawaiianOrPacificIslander","Other","WorkD:LessThan1m", 
+                             "WorkD:Between1And6m",'WorkD:Between6mAnd1y","WorkD:Between1yAnd5y","WorkD:MoreThan5y","WorkD:Missing','Spouse/Partner:0',
+                             "Spouse/Partner:1","Spouse/Partner:2","Spouse/Partner:3More","Children25-Older:0","Children25-Older:1",
+                             "Children25-Older:2More","Children18-24:0","Children18-24:1","Children18-24:2More","Children5-Younger:0",
+                             "Children5-Younger:1","Children5-Younger:2More","Age:40-60","Age:60-Over","Age:Under-40","South", 
+                             "Midwest","West","Northeast","College","SomeCollege","HighSchool","Under50k","50k-100k","100k-Over",
+                             "y:2013","y:2014","y:2015","y:2016","y:2017","y:2018","y:2019", "Target"))]
+
 testSig <- test[, (names(test) %in% c("FinanceMuchWorseOff","FinanceSomewhatWorseOff","FinanceAboutTheSame","FinanceSomewhatBetterOff", 
                              "FinanceMuchBetterOff","FinProspMuchWorseOff","FinProspSomewhatWorseOff","FinProspAboutTheSame",
                              "FinProspSomewhatBetterOff","FinProspMuchBetterOff","UnemRate:<20","UnemRate:20-40","UnemRate:40-60", 
@@ -149,6 +175,10 @@ testSig <- test[, (names(test) %in% c("FinanceMuchWorseOff","FinanceSomewhatWors
 
 dim(trainSig)
 dim(testSig)
+#Exporting into csv file
+getwd()
+write.csv(trainSig,'TrainSig.csv')
+write.csv(testSig,'TestSig.csv')
 #4.------------------------------HYPER TUNNING PARAMETER
 #1.GRID CROSS VALIDATION
 #1.1Define the grid

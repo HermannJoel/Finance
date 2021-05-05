@@ -1,5 +1,4 @@
-# Finance
-This repository contains various Machile learning projects
+# Examples of Real life data machine learning projects
 ---
 # Project 1:BULLDOZER SALE PRICE PREDICTION USING LINEAR REGRESSION:Overview
 ## 1.Codes and Resources Used

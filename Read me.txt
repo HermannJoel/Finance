@@ -1,3 +1,0 @@
-1.Machine Learning Projects
-2.KNN
-3.Kmeans

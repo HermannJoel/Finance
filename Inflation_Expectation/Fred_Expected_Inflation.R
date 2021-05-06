@@ -294,6 +294,11 @@ regr.eval(test$Target, preds)
 library(usethis)
 use_git_config(user.name="HermannJoel", user.email="hermannjoel.ngayap@yahoo.fr")
 
+#Project 2
+telcom <- read.csv(file.choose())
+str(telcom)
+summary(telcom)
+
 
 
 

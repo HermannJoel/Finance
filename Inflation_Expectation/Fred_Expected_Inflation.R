@@ -320,12 +320,20 @@ summary(telcom)
 #will protect the brand image and save resources and cost by not spamming those who doesn't whant to be contacted
 #Goal: The goil is to predict if a given client will subscribe to a term deposit 
 #Data: This data is related wit direct marketing campaigns of a portuguese institution
-bank_data <- read.csv(file.choose(), sep = ";")
+library(dyplr)
+library()
+
+bank_data <- read.csv(file.choose(), sep = ',')
 str(bank_data)
 summary(bank_data)
 head(bank_data)
-
-table(bank_data$subscribed)
+#Rename y target
+bank_data %>% 
+  rename(
+    subscribed=y)#with dyplr
+table(bank_data$y)
+colnames(bank_data)[colnames(bank_data) == 'y'] <- 'suscribed'
+table(bank_data$suscribed)
 
 
 

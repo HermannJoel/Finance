@@ -320,21 +320,47 @@ summary(telcom)
 #will protect the brand image and save resources and cost by not spamming those who doesn't whant to be contacted
 #Goal: The goil is to predict if a given client will subscribe to a term deposit 
 #Data: This data is related wit direct marketing campaigns of a portuguese institution
-library(dyplr)
-library()
+library(dplyr)
+library(skimr)
+library(mice)
+library(caret)
 
 bank_data <- read.csv(file.choose(), sep = ',')
 str(bank_data)
 summary(bank_data)
 head(bank_data)
+dim(bank_data)
 #Rename y target
 bank_data %>% 
   rename(
-    subscribed=y)#with dyplr
+    subscribed=y)#with dplyr
 table(bank_data$y)
 colnames(bank_data)[colnames(bank_data) == 'y'] <- 'suscribed'
+#EDA
+#check na
+skimmed <- skim(bank_data)
+View(skimmed)
+
+mice::md.pattern(bank_data)
+
 table(bank_data$suscribed)
+table(bank_data$suscribed)/NROW(bank_data$suscribed)*100
+#Almost 89 percent of the data are did not churn, So the data set is quite imbalanced
+sapply(bank_data, function(x){unique(x) %>% NROW()})#To se unique values
 
+#Distribution of other variables
+table(bank_data$housing)#most of clients own they house
+table(bank_data$contact)
+#chi square test for categorical variables
+chisq.test(y=bank_data$suscribed, x=bank_data$housing)
+chisq.test(y=bank_data$suscribed, x=bank_data$contract)
+#Anova for cat vs num
+summary(aov(duration~suscribed, data=bank_data))
+summary(aov(age~suscribed, data=bank_data))
 
-
-
+#Boxplot
+featurePlot(x=bank_data[, c(2, 20)], y=factor(bank_data$suscribed), 
+            plot='box',
+            strip=strip.custom(par.strip.text=list(cex=.6)),
+            scales=list(x=list(relation="free"),
+                        y=list(relation="free")))

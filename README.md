@@ -1,31 +1,23 @@
 # Examples of Real life data machine learning projects
 ---
 # Project 1:BULLDOZER SALE PRICE PREDICTION USING LINEAR REGRESSION:Overview
-## 1.Codes and Resources Used
+ * Problem definition:
+ 
+---
  
  *
- *
- *
+---
+
  *
 ---
-## 2.Data Cleaning
+
+ *
+---
  
- *
- *
- *
----
-## 3.EDA
+# Project 2:CREDIT RISK MODELLING:Overview
 
- *
- *
- *
----
+ * 1. Problem definition: Given a borrower's characteristics, can we predict
+      itsprobability of default
 
-## 4.RESULTS
-
- *
- *
- * 
+ * 2. Data: The data set can be found here https://www.kaggle.com/wordsforthewise/lending-club
  ---
- 
-# Project 2:CRM CUSTOMERS CLUSTERING USING PCA and K-MEANS:Overview

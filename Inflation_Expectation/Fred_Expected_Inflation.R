@@ -359,8 +359,30 @@ summary(aov(duration~suscribed, data=bank_data))
 summary(aov(age~suscribed, data=bank_data))
 
 #Boxplot
-featurePlot(x=bank_data[, c(2, 20)], y=factor(bank_data$suscribed), 
+featurePlot(x=bank_data[, c(1, 11:12, 16, 19)], y=factor(bank_data$suscribed), 
             plot='box',
             strip=strip.custom(par.strip.text=list(cex=.6)),
             scales=list(x=list(relation="free"),
                         y=list(relation="free")))
+
+#Density plot
+featurePlot(x=bank_data[, c(1, 11:12, 16, 19)], y=factor(bank_data$suscribed), 
+            plot='density',
+            strip=strip.custom(par.strip.text=list(cex=.6)),
+            scales=list(x=list(relation="free"),
+                        y=list(relation="free")))
+
+#Scatter plot
+featurePlot(x=bank_data[, c(1, 11:12 , 16, 19)], 
+            y=as.numeric(bank_data$suscribed), 
+            plot='scatter',
+            strip=strip.custom(par.strip.text=list(cex=.6)))
+
+
+#-------------------------------Split into training and test
+set.seed(88)
+trainRowNums <- createDataPartition(bank_data$suscribed, p=0.8, list=FALSE)
+train <- bank_data[trainRowNums, ]
+test <- bank_data[-trainRowNums,]
+dim(train)
+dim(test)

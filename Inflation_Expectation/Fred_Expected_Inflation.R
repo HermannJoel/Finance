@@ -1,6 +1,7 @@
 #----------------------------------DECOMPOSING EXPECTED INFLATION PREDICTION
 library(dplyr)
 library(mice)
+library(rsample)
 #1.EDA
 #Import the imput
 inputs.fred <- read.csv(file.choose())
@@ -380,9 +381,15 @@ featurePlot(x=bank_data[, c(1, 11:12 , 16, 19)],
 
 
 #-------------------------------Split into training and test
+#set.seed(88)
+#trainRowNums <- createDataPartition(bank_data$suscribed, p=0.8, list=FALSE)
+#train <- bank_data[trainRowNums, ]
+#test <- bank_data[-trainRowNums,]
+#dim(train)
+#dim(test)
 set.seed(88)
-trainRowNums <- createDataPartition(bank_data$suscribed, p=0.8, list=FALSE)
-train <- bank_data[trainRowNums, ]
-test <- bank_data[-trainRowNums,]
+data_split <- initial_split(bank_data, prop = .80)
+train <- training(data_split)
+test  <- testing(data_split)
 dim(train)
 dim(test)

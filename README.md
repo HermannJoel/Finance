@@ -11,9 +11,9 @@
 
   `PD`(probability of defaut) using a Logistic regression
 
-. `EAD`(Exposure at Default) Using a linear regression
+  `EAD`(Exposure at Default) Using a linear regression
 
-. `LGD`(Lost Given Default) using a linear regression
+  `LGD`(Lost Given Default) using a linear regression
 
 * For our PD Model, The variable loan Status will be our target. The model will predict a customer's PD 
   notably whether he has defaulted or not giving certains features.

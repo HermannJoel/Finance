@@ -7,9 +7,12 @@
 
 * Data: We use the lending club data set provided by Kaggle.The original data set can be found here https://www.kaggle.com/wordsforthewise/lending-club
 
-* Methodology:  
+* Methodology:
+
   `PD`(probability of defaut) using a Logistic regression
+
 . `EAD`(Exposure at Default) Using a linear regression
+
 . `LGD`(Lost Given Default) using a linear regression
 
 * For our PD Model, The variable loan Status will be our target. The model will predict a customer's PD 

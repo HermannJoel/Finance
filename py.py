@@ -53,3 +53,4 @@ ax.scatter3D(x1, y, x2, color = "#2d3436")
 plt.title("simple 3D scatter plot") 
 # show plot
 plt.show()              
+

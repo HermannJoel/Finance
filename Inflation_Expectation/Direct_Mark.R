@@ -8,7 +8,6 @@ library(dplyr)
 library(skimr)
 library(mice)
 library(caret)
-
 bank_data <- read.csv(file.choose(), sep = ',')
 str(bank_data)
 summary(bank_data)

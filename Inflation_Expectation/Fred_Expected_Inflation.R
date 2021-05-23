@@ -180,7 +180,7 @@ dim(testSig)
 getwd()
 write.csv(trainSig,'D:\\DataBases\\DataSets\\FED NY Expected Inlation\\TrainSig.csv', row.names=FALSE)
 write.csv(testSig,'D:\\DataBases\\DataSets\\FED NY Expected Inlation\\TestSig.csv', row.names=FALSE)
-#4.------------------------------HYPER TUNNING PARAMETER
+#4.------------------------------HYPER TUNING PARAMETER
 #1.GRID CROSS VALIDATION
 #1.1Define the grid
 marsGrid <- expand.grid(lambda= seq(0, 1, 0.01))

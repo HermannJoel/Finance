@@ -1,7 +1,7 @@
 # Examples of Real life data machine learning projects
 ---
 
-# Project 2:CREDIT RISK MODELLING:Overview
+# Project 1:CREDIT RISK MODELLING:Overview
 
 * Problem definition: Given a borrower's characteristics, can we predict itsprobability of default
 
@@ -15,7 +15,7 @@
 
   `LGD`(Lost Given Default) using a linear regression
 
-* For our PD Model, The variable loan Status will be our target. The model will predict a customer's PD 
+* For our PD Model, The variable loan Status will be our target. The model will predict a customer's PD
   notably whether he has defaulted or not giving certains features.
 
 * For the LGD Model. We need to calculate how much of a loan was recovered after the borrower had defaulted.
@@ -26,10 +26,10 @@
 
  ---
 
-# Project 3: BULLDOZER SALE PRICE PREDICTION USING LINEAR REGRESSION:Overview
+# Project 2: BULLDOZER SALE PRICE PREDICTION USING LINEAR REGRESSION:Overview
 
-* Problem definition: given bulldozers characteristics and previous examples of how much similar bulldozers 
-  have been sold for, can we predict the future sale price of a bulldozer 
+* Problem definition: given bulldozers characteristics and previous examples of how much similar bulldozers
+  have been sold for, can we predict the future sale price of a bulldozer
 
 * Data: There are 3 datasets: Train.csv - Historical bulldozer sales examples up to 2011 (close to 400,000
   examples with 50+ different attributes, including SalePrice which is the target variable). Valid.csv - Historical bulldozer sales examples from January 1 2012 to April 30 2012 (close to 12,000 examples with the same attributes as Train.csv). Test.csv - Historical bulldozer sales examples from May 1 2012 to November 2012 (close to 12,000 examples but missing the SalePrice attribute, as this is what we’ll be trying to predict).

@@ -23,18 +23,4 @@
 
 * For the EAD Model, We have to calculate the total exposure at the moment the borrower defaulted compared to
   the total exposure in the past. The target will be the total recovery principal variable will be our target for this Model.
-
- ---
-
-# Project 2: BULLDOZER SALE PRICE PREDICTION USING LINEAR REGRESSION:Overview
-
-* Problem definition: given bulldozers characteristics and previous examples of how much similar bulldozers
-  have been sold for, can we predict the future sale price of a bulldozer
-
-* Data: There are 3 datasets: Train.csv - Historical bulldozer sales examples up to 2011 (close to 400,000
-  examples with 50+ different attributes, including SalePrice which is the target variable). Valid.csv - Historical bulldozer sales examples from January 1 2012 to April 30 2012 (close to 12,000 examples with the same attributes as Train.csv). Test.csv - Historical bulldozer sales examples from May 1 2012 to November 2012 (close to 12,000 examples but missing the SalePrice attribute, as this is what we’ll be trying to predict).
-
-* Methodology:Created a linear regression model that predict the future sale price. Trained and test the
-  model with sales data up to 2011 and validated the model with sales data from May 1 2012 to November 2012.
-
 ---

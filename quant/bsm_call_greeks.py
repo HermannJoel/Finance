@@ -21,21 +21,21 @@ def BSM_delta(St, K, t, T, r, sigma):
     Parameters
     ==========
     St: float
-    stock/index level at time t
+        stock/index level at time t
     K: float
-    strike price
+        strike price
     t: float
-    valuation date
+        valuation date
     T: float
-    date of maturity/time-to-maturity if t = 0; T > t
+        date of maturity/time-to-maturity if t = 0; T > t
     r: float
-    constant, risk-less short rate
+        constant, risk-less short rate
     sigma: float
-    volatility
+        volatility
     Returns
     =======
     delta: float
-    European call option DELTA
+        European call option DELTA
     '''
     d1 = d1f(St, K, t, T, r, sigma)
     delta = N(d1)
@@ -46,21 +46,21 @@ def BSM_gamma(St, K, t, T, r, sigma):
     Parameters
     ==========
     St: float
-    stock/index level at time t
+        stock/index level at time t
     K: float
-    strike price
+        strike price
     t: float
-    valuation date
+        valuation date
     T: float
-    date of maturity/time-to-maturity if t = 0; T > t
+        date of maturity/time-to-maturity if t = 0; T > t
     r: float
-    constant, risk-less short rate
+        constant, risk-less short rate
     sigma: float
-    volatility
+        volatility
     Returns
     =======
     gamma: float
-    European call option GAMMA
+        European call option GAMMA
     '''
     d1 = d1f(St, K, t, T, r, sigma)
     gamma = dN(d1) / (St * sigma * math.sqrt(T - t))
@@ -97,17 +97,17 @@ def BSM_rho(St, K, t, T, r, sigma):
     Parameters
     ==========
     St: float
-    stock/index level at time t
+        stock/index level at time t
     K: float
-    strike price
+        strike price
     t: float
-    valuation date
+        valuation date
     T: float
-    date of maturity/time-to-maturity if t = 0; T > t
+        date of maturity/time-to-maturity if t = 0; T > t
     r: float
-    constant, risk-less short rate
+        constant, risk-less short rate
     sigma: float
-    volatility
+        volatility
     Returns
     =======
     rho: float
@@ -123,21 +123,21 @@ def BSM_vega(St, K, t, T, r, sigma):
     Parameters
     ==========
     St: float
-    stock/index level at time t
+        stock/index level at time t
     K: float
-    strike price
+        strike price
     t: float
-    valuation date
+        valuation date
     T: float
-    date of maturity/time-to-maturity if t = 0; T > t
+        date of maturity/time-to-maturity if t = 0; T > t
     r: float
-    constant, risk-less short rate
+        constant, risk-less short rate
     sigma: float
-    volatility
+        volatility
     Returns
     =======
     vega: float
-    European call option VEGA
+        European call option VEGA
     '''
     d1=d1f(St, K, t, T, r, sigma)
     vega=St * dN(d1) * math.sqrt(T - t)

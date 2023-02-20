@@ -44,6 +44,7 @@ class call_option(object):
         value = (self.S0 * stats.norm.cdf(d1, 0.0, 1.0) 
                  - self.K * exp(-self.r * self.T) * stats.norm.cdf(d2, 0.0, 1.0))
         return value
+    
     def vega(self):
         ''' Returns Vega of option. '''
         d1 = ((log(self.S0 / self.K) 
@@ -51,21 +52,10 @@ class call_option(object):
               / (self.sigma * sqrt(self.T)))
         vega = self.S0 * stats.norm.cdf(d1, 0.0, 1.0) * sqrt(self.T)
         return vega
+    
     def imp_vol(self, C0, sigma_est=0.2, it=100):
         ''' Returns implied volatility given option price. '''
         option = call_option(self.S0, self.K, self.T, self.r, sigma_est)
         for i in range(it): 
             option.sigma -= (option.value() - C0) / option.vega()
         return option.sigma
-
-
-from bsm_option_class import call_option
-option=call_option(100., 105., 1.0, 0.05, 0.2)
-
-value=option.value()
-value
-
-imp_vol=option.imp_vol(C0=value)
-imp_vol
-
-vega=option.vega()

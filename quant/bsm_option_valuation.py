@@ -36,21 +36,21 @@ def BSM_call_value(St, K, t, T, r, sigma):
     Parameters
     ==========
     St: float
-    stock/index level at time t
+        stock/index level at time t
     K: float
-    strike price
+        strike price
     t: float
-    valuation date
+        valuation date
     T: float
-    date of maturity/time-to-maturity if t = 0; T > t
+        date of maturity/time-to-maturity if t = 0; T > t
     r: float
-    constant, risk-less short rate
+        constant, risk-less short rate
     sigma: float
-    volatility
+        volatility
     Returns
     =======
     call_value: float
-    European call present value at t
+        European call present value at t
     '''
     d1 = d1f(St, K, t, T, r, sigma)
     d2 = d1 - sigma * math.sqrt(T - t)
@@ -62,22 +62,21 @@ def BSM_put_value(St, K, t, T, r, sigma):
     Parameters
     ==========
     St: float
-    stock/index level at time t
+        stock/index level at time t
     K: float
-    strike price
+        strike price
     t: float
-    valuation date
+        valuation date
     T: float
-    date of maturity/time-to-maturity if t = 0; T > t
+        date of maturity/time-to-maturity if t = 0; T > t
     r: float
-    constant, risk-less short rate
+        constant, risk-less short rate
     sigma: float
-    volatility
+        volatility
     Returns
     =======
     put_value: float
-    
-    European put present value at t
+        European put present value at t
     '''
     put_value=BSM_call_value(St, K, t, T, r, sigma) - St + math.exp(-r * (T - t)) * K
     

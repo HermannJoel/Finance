@@ -15,6 +15,7 @@ if __name__ == "__main__":
     me_gbm.add_constant('paths', 10000)
     csr=constant_short_rate('csr', 0.05)
     me_gbm.add_curve('discount_curve', csr)
+    
     #instantiate a model simulation object
     gbm=geometric_brownian_motion('gbm', me_gbm)
     gbm

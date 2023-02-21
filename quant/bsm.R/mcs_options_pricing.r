@@ -48,22 +48,3 @@ plainVanillaPayoff <- function(path)
     payoff
 }
 
-#simulate
-TypeFlag <<- "c"
-S <<- 100
-X <<- 100
-Time <<- 1/12
-sigma <<- 0.4
-r <<- 0.1
-b <<- 0.1
-
-set.seed = 4711
-mc= MonteCarloOption(delta.t = 1/360, pathLength = 30, mcSteps = 5000,
-                     mcLoops= 20, path.gen = wienerPath, payoff.calc = plainVanillaPayoff)
-
-#plot
-mcPrice = cumsum(mc)/(1:length(mc))
-plot(mcPrice, type = "l", main = "Arithmetic Asian Option", xlab = "Monte Carlo Loops",
-ylab = "Option Price")
-abline(h = 5.0118, col = "red")
-grid()

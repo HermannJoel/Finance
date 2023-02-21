@@ -62,16 +62,6 @@ rho <- function(TypeFlag, S, X, Time, r, b, sigma) {
     rho
 }
 
-#implementation
-#delta
-delta("c", S = 105, X = 100, Time = 0.5, r = 0.1, b = 0, sigma = 0.36)
-delta("p", S = 105, X = 100, Time = 0.5, r = 0.1, b = 0, sigma = 0.36)
-
-#theta
-theta("p", S = 430, X = 405, Time = 1/12, r = 0.07, b = 0.07 - 0.05, sigma = 0.2)
-#vega
-vega("c", S = 55, X = 60, Time = 0.75, r = 0.1, b = 0.1, sigma = 0.3)
-
 #bsm
 BlackScholes <- function(TypeFlag, S, X, Time, r, b, sigma)
 {
@@ -87,7 +77,7 @@ BlackScholes <- function(TypeFlag, S, X, Time, r, b, sigma)
     price
 }
 
-> CBND <- function (a, b, rho){
+CBND <- function (a, b, rho){
     # Cumulative Bivariate Normal distribution:
     if (abs(rho) == 1) rho = rho - (1e-12) * sign(rho)
     X = c(0.24840615, 0.39233107, 0.21141819, 0.03324666, 0.00082485334)
@@ -124,7 +114,8 @@ BlackScholes <- function(TypeFlag, S, X, Time, r, b, sigma)
 
 RollGeskeWhaley <- function(S, X, time1, Time2, r, D, sigma)
 {
-    Tolerance Settings:
+    #Tolerance Settings:
+
     big = 1.0e+8
     eps = 1.0e-5
     # Compute Option Price:
